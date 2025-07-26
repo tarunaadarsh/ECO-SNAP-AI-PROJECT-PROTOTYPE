@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSnap - Eco-Friendly Waste Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0f9ff 100%);
+            min-height: 100vh;
+        }
+        
+        .eco-gradient {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        }
+        
+        .cream-gradient {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+        
+        .blue-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s ease;
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .slide-out {
+            animation: slideOut 0.3s ease-in;
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-100%); opacity: 0; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse-eco {
+            animation: pulseEco 2s infinite;
+        }
+        
+        @keyframes pulseEco {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="max-w-md mx-auto bg-white min-h-screen relative overflow-hidden">
+        
+        <!-- Dashboard View -->
+        <div id="dashboard" class="view active">
+            <!-- Header -->
+            <header class="eco-gradient p-6 text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12"></div>
+                
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center pulse-eco">
+                                <span class="text-green-600 text-2xl">🌱</span>
+                            </div>
+                            <div>
+                                <h1 class="text-2xl font-bold">EcoSnap</h1>
+                                <p class="text-green-100 text-sm">Make Earth Cleaner</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold">1,247</div>
+                            <div class="text-green-100 text-xs">Eco Points</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-20 rounded-2xl p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm">Level 5 - Eco Warrior</span>
+                            <span class="text-sm">78%</span>
+                        </div>
+                        <div class="w-full bg-white bg-opacity-30 rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <div class="p-6 -mt-8 relative z-10">
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white rounded-2xl p-4 text-center card-shadow hover-lift cursor-pointer" onclick="showStats()">
+                        <div class="w-12 h-12 eco-gradient rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="text-white text-xl">📊</span>
+                        </div>
+                        <div class="text-2xl font-bold text-gray-800">23</div>
+                        <div class="text-xs text-gray-600">Reports</div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-4 text-center card-shadow hover-lift cursor-pointer" onclick="showStats()">
+                        <div class="w-12 h-12 blue-gradient rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="text-white text-xl">🎯</span>
+                        </div>
+                        <div class="text-2xl font-bold text-gray-800">94%</div>
+                        <div class="text-xs text-gray-600">Accuracy</div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-4 text-center card-shadow hover-lift cursor-pointer" onclick="showStats()">
+                        <div class="w-12 h-12 cream-gradient rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="text-orange-600 text-xl">⭐</span>
+                        </div>
+                        <div class="text-2xl font-bold text-gray-800">12</div>
+                        <div class="text-xs text-gray-600">Badges</div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button class="bg-white rounded-2xl p-5 text-left card-shadow hover-lift" onclick="showScanner()">
+                            <div class="w-12 h-12 eco-gradient rounded-xl flex items-center justify-center mb-3">
+                                <span class="text-white text-2xl">📸</span>
+                            </div>
+                            <div class="font-semibold text-gray-800">Scan Waste</div>
+                            <div class="text-sm text-gray-600 mt-1">AI Detection</div>
+                        </button>
+                        
+                        <button class="bg-white rounded-2xl p-5 text-left card-shadow hover-lift" onclick="showMap()">
+                            <div class="w-12 h-12 blue-gradient rounded-xl flex items-center justify-center mb-3">
+                                <span class="text-white text-2xl">🗺️</span>
+                            </div>
+                            <div class="font-semibold text-gray-800">Waste Map</div>
+                            <div class="text-sm text-gray-600 mt-1">Find Nearby</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Reports -->
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Recent Reports</h3>
+                        <button class="text-green-600 text-sm font-medium" onclick="showReports()">View All</button>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="bg-white rounded-2xl p-4 card-shadow hover-lift cursor-pointer" onclick="showReportDetail(1)">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-red-600 text-xl">☢️</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-800">Chemical Waste</div>
+                                    <div class="text-sm text-gray-600">Industrial Area • 2h ago</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-green-600 font-bold">+100</div>
+                                    <div class="text-xs text-gray-500">points</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-4 card-shadow hover-lift cursor-pointer" onclick="showReportDetail(2)">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-blue-600 text-xl">🥤</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-800">Plastic Bottles</div>
+                                    <div class="text-sm text-gray-600">Park Area • 5h ago</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-green-600 font-bold">+50</div>
+                                    <div class="text-xs text-gray-500">points</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badges Section -->
+                <div class="mb-20">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Latest Badges</h3>
+                        <button class="text-green-600 text-sm font-medium" onclick="showBadges()">View All</button>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-white rounded-2xl p-4 text-center card-shadow hover-lift cursor-pointer" onclick="showBadgeDetail(1)">
+                            <div class="w-12 h-12 cream-gradient rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-orange-600 text-xl">🏆</span>
+                            </div>
+                            <div class="text-xs font-semibold text-gray-800">Eco Warrior</div>
+                            <div class="text-xs text-gray-600 mt-1">25 Reports</div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-4 text-center card-shadow hover-lift cursor-pointer" onclick="showBadgeDetail(2)">
+                            <div class="w-12 h-12 blue-gradient rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-white text-xl">🎯</span>
+                            </div>
+                            <div class="text-xs font-semibold text-gray-800">Sharp Eye</div>
+                            <div class="text-xs text-gray-600 mt-1">95% Accuracy</div>
+                        </div>
+                        
+                        <div class="bg-gray-100 rounded-2xl p-4 text-center card-shadow opacity-60">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-gray-500 text-xl">🌟</span>
+                            </div>
+                            <div class="text-xs font-semibold text-gray-500">Legend</div>
+                            <div class="text-xs text-gray-400 mt-1">100 Reports</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats View -->
+        <div id="statsView" class="view hidden">
+            <div class="slide-in">
+                <header class="eco-gradient p-6 text-white">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="showDashboard()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <span class="text-white">←</span>
+                        </button>
+                        <div>
+                            <h2 class="text-xl font-bold">Statistics</h2>
+                            <p class="text-green-100 text-sm">Your Impact Overview</p>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="p-6 fade-in">
+                    <!-- Overview Cards -->
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-white rounded-2xl p-5 card-shadow">
+                            <div class="text-3xl font-bold text-green-600">23</div>
+                            <div class="text-sm text-gray-600">Total Reports</div>
+                            <div class="text-xs text-green-600 mt-1">+3 this week</div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-5 card-shadow">
+                            <div class="text-3xl font-bold text-blue-600">94%</div>
+                            <div class="text-sm text-gray-600">Accuracy Rate</div>
+                            <div class="text-xs text-blue-600 mt-1">+2% improved</div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-5 card-shadow">
+                            <div class="text-3xl font-bold text-orange-600">1,247</div>
+                            <div class="text-sm text-gray-600">Eco Points</div>
+                            <div class="text-xs text-orange-600 mt-1">+150 today</div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-5 card-shadow">
+                            <div class="text-3xl font-bold text-purple-600">12</div>
+                            <div class="text-sm text-gray-600">Badges Earned</div>
+                            <div class="text-xs text-purple-600 mt-1">2 new</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Weekly Progress -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow mb-6">
+                        <h3 class="font-semibold text-gray-800 mb-4">Weekly Progress</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Monday</span>
+                                <div class="flex-1 mx-3 bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                                <span class="text-sm font-medium">4</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Tuesday</span>
+                                <div class="flex-1 mx-3 bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                                <span class="text-sm font-medium">3</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Wednesday</span>
+                                <div class="flex-1 mx-3 bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                                <span class="text-sm font-medium">5</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Today</span>
+                                <div class="flex-1 mx-3 bg-gray-200 rounded-full h-2">
+                                    <div class="progress-bar h-2 rounded-full" style="width: 40%"></div>
+                                </div>
+                                <span class="text-sm font-medium">2</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Waste Types -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow">
+                        <h3 class="font-semibold text-gray-800 mb-4">Waste Types Detected</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-xl">🥤</span>
+                                    <span class="text-sm text-gray-700">Plastic</span>
+                                </div>
+                                <span class="text-sm font-medium text-gray-800">8 reports</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-xl">☢️</span>
+                                    <span class="text-sm text-gray-700">Chemical</span>
+                                </div>
+                                <span class="text-sm font-medium text-gray-800">5 reports</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-xl">🛢️</span>
+                                    <span class="text-sm text-gray-700">Oil Spill</span>
+                                </div>
+                                <span class="text-sm font-medium text-gray-800">3 reports</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scanner View -->
+        <div id="scannerView" class="view hidden">
+            <div class="slide-in">
+                <header class="eco-gradient p-6 text-white">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="showDashboard()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <span class="text-white">←</span>
+                        </button>
+                        <div>
+                            <h2 class="text-xl font-bold">AI Scanner</h2>
+                            <p class="text-green-100 text-sm">Detect & Report Waste</p>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="p-6 fade-in">
+                    <!-- Camera Preview -->
+                    <div class="bg-gray-900 rounded-3xl p-8 text-center mb-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-green-400 to-blue-500 opacity-20"></div>
+                        <div class="relative z-10">
+                            <div class="w-32 h-32 mx-auto mb-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                <span class="text-6xl">📸</span>
+                            </div>
+                            <h3 class="text-white text-xl font-bold mb-2">AI Ready</h3>
+                            <p class="text-gray-300 text-sm mb-6">Point camera at waste to analyze</p>
+                            <button onclick="simulateScan()" class="eco-gradient text-white px-8 py-3 rounded-2xl font-semibold hover-lift">
+                                Start Scanning
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Scanner Tips -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow mb-6">
+                        <h3 class="font-semibold text-gray-800 mb-3">Scanning Tips</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-sm text-gray-700">Ensure good lighting</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-sm text-gray-700">Keep camera steady</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-green-600">✓</span>
+                                <span class="text-sm text-gray-700">Focus on waste clearly</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Scans -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow">
+                        <h3 class="font-semibold text-gray-800 mb-3">Recent Scans</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                                    <span class="text-red-600">☢️</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="text-sm font-medium text-gray-800">Chemical Waste</div>
+                                    <div class="text-xs text-gray-600">2 hours ago</div>
+                                </div>
+                                <span class="text-green-600 text-sm font-medium">+100</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <span class="text-blue-600">🥤</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="text-sm font-medium text-gray-800">Plastic Bottles</div>
+                                    <div class="text-xs text-gray-600">5 hours ago</div>
+                                </div>
+                                <span class="text-green-600 text-sm font-medium">+50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map View -->
+        <div id="mapView" class="view hidden">
+            <div class="slide-in">
+                <header class="eco-gradient p-6 text-white">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="showDashboard()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <span class="text-white">←</span>
+                        </button>
+                        <div>
+                            <h2 class="text-xl font-bold">Waste Map</h2>
+                            <p class="text-green-100 text-sm">Nearby Waste Sites</p>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="p-6 fade-in">
+                    <!-- Map Placeholder -->
+                    <div class="bg-blue-50 rounded-3xl p-8 text-center mb-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-green-500 opacity-20"></div>
+                        <div class="relative z-10">
+                            <div class="w-32 h-32 mx-auto mb-6 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
+                                <span class="text-6xl">🗺️</span>
+                            </div>
+                            <h3 class="text-gray-800 text-xl font-bold mb-2">Interactive Map</h3>
+                            <p class="text-gray-600 text-sm mb-6">Discover waste sites around you</p>
+                            <button class="blue-gradient text-white px-8 py-3 rounded-2xl font-semibold hover-lift">
+                                Enable Location
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Nearby Sites -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow mb-6">
+                        <h3 class="font-semibold text-gray-800 mb-4">Nearby Sites</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-red-600 text-xl">☢️</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-medium text-gray-800">Industrial Zone</div>
+                                    <div class="text-sm text-gray-600">0.5 km away • High Priority</div>
+                                </div>
+                                <button class="text-blue-600 text-sm font-medium">View</button>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-blue-600 text-xl">🥤</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-medium text-gray-800">City Park</div>
+                                    <div class="text-sm text-gray-600">1.2 km away • Medium Priority</div>
+                                </div>
+                                <button class="text-blue-600 text-sm font-medium">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Map Filters -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow">
+                        <h3 class="font-semibold text-gray-800 mb-3">Filter by Type</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">All</button>
+                            <button class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Chemical</button>
+                            <button class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Plastic</button>
+                            <button class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Oil</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports View -->
+        <div id="reportsView" class="view hidden">
+            <div class="slide-in">
+                <header class="eco-gradient p-6 text-white">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="showDashboard()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <span class="text-white">←</span>
+                        </button>
+                        <div>
+                            <h2 class="text-xl font-bold">All Reports</h2>
+                            <p class="text-green-100 text-sm">Your Contribution History</p>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="p-6 fade-in">
+                    <!-- Filter Tabs -->
+                    <div class="flex space-x-2 mb-6">
+                        <button class="bg-green-600 text-white px-4 py-2 rounded-xl text-sm font-medium">All</button>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm">This Week</button>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm">This Month</button>
+                    </div>
+                    
+                    <!-- Reports List -->
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-2xl p-4 card-shadow hover-lift cursor-pointer" onclick="showReportDetail(1)">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-red-600 text-2xl">☢️</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-800">Chemical Waste</div>
+                                    <div class="text-sm text-gray-600">Industrial Area • 2 hours ago</div>
+                                    <div class="text-xs text-red-600 font-medium mt-1">High Priority • Resolved</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-green-600 font-bold text-lg">+100</div>
+                                    <div class="text-xs text-gray-500">points</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-4 card-shadow hover-lift cursor-pointer" onclick="showReportDetail(2)">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-blue-600 text-2xl">🥤</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-800">Plastic Bottles</div>
+                                    <div class="text-sm text-gray-600">Park Area • 5 hours ago</div>
+                                    <div class="text-xs text-blue-600 font-medium mt-1">Medium Priority • In Progress</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-green-600 font-bold text-lg">+50</div>
+                                    <div class="text-xs text-gray-500">points</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-4 card-shadow hover-lift cursor-pointer" onclick="showReportDetail(3)">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-orange-600 text-2xl">🛢️</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-800">Oil Spill</div>
+                                    <div class="text-sm text-gray-600">Harbor • 1 day ago</div>
+                                    <div class="text-xs text-orange-600 font-medium mt-1">High Priority • Resolved</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-green-600 font-bold text-lg">+75</div>
+                                    <div class="text-xs text-gray-500">points</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-4 card-shadow hover-lift cursor-pointer" onclick="showReportDetail(4)">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+                                    <span class="text-purple-600 text-2xl">📱</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-800">E-Waste</div>
+                                    <div class="text-sm text-gray-600">Tech District • 2 days ago</div>
+                                    <div class="text-xs text-purple-600 font-medium mt-1">Medium Priority • Resolved</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-green-600 font-bold text-lg">+60</div>
+                                    <div class="text-xs text-gray-500">points</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Detail View -->
+        <div id="reportDetailView" class="view hidden">
+            <div class="slide-in">
+                <header class="eco-gradient p-6 text-white">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="showReports()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <span class="text-white">←</span>
+                        </button>
+                        <div>
+                            <h2 class="text-xl font-bold">Report Details</h2>
+                            <p class="text-green-100 text-sm">Waste Detection Info</p>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="p-6 fade-in">
+                    <!-- Report Header -->
+                    <div class="bg-white rounded-2xl p-6 card-shadow mb-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center">
+                                <span class="text-red-600 text-3xl">☢️</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-800">Chemical Waste</h3>
+                                <p class="text-gray-600">Industrial Area • 2 hours ago</p>
+                                <div class="flex items-center space-x-2 mt-2">
+                                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-medium">High Priority</span>
+                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">Resolved</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-gray-100">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-600">+100</div>
+                                <div class="text-xs text-gray-600">Points Earned</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-600">94%</div>
+                                <div class="text-xs text-gray-600">AI Confidence</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-orange-600">15m</div>
+                                <div class="text-xs text-gray-600">Response Time</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Location Info -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow mb-6">
+                        <h3 class="font-semibold text-gray-800 mb-3">Location Details</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-blue-600">📍</span>
+                                <span class="text-sm text-gray-700">123 Industrial Ave, Tech City</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-green-600">🕐</span>
+                                <span class="text-sm text-gray-700">Reported at 2:30 PM</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-purple-600">🎯</span>
+                                <span class="text-sm text-gray-700">GPS Accuracy: High</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Analysis -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow mb-6">
+                        <h3 class="font-semibold text-gray-800 mb-3">AI Analysis</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Waste Type</span>
+                                <span class="text-sm font-medium text-gray-800">Chemical/Toxic</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Confidence Level</span>
+                                <span class="text-sm font-medium text-blue-600">94%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Risk Level</span>
+                                <span class="text-sm font-medium text-red-600">High</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Estimated Volume</span>
+                                <span class="text-sm font-medium text-gray-800">Medium</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Status Timeline -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow">
+                        <h3 class="font-semibold text-gray-800 mb-4">Status Timeline</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-green-600 rounded-full"></div>
+                                <div class="flex-1">
+                                    <div class="text-sm font-medium text-gray-800">Report Submitted</div>
+                                    <div class="text-xs text-gray-600">2:30 PM</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-blue-600 rounded-full"></div>
+                                <div class="flex-1">
+                                    <div class="text-sm font-medium text-gray-800">AI Analysis Complete</div>
+                                    <div class="text-xs text-gray-600">2:31 PM</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-orange-600 rounded-full"></div>
+                                <div class="flex-1">
+                                    <div class="text-sm font-medium text-gray-800">Authorities Notified</div>
+                                    <div class="text-xs text-gray-600">2:35 PM</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-green-600 rounded-full"></div>
+                                <div class="flex-1">
+                                    <div class="text-sm font-medium text-gray-800">Cleanup Completed</div>
+                                    <div class="text-xs text-gray-600">4:45 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Badges View -->
+        <div id="badgesView" class="view hidden">
+            <div class="slide-in">
+                <header class="eco-gradient p-6 text-white">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="showDashboard()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <span class="text-white">←</span>
+                        </button>
+                        <div>
+                            <h2 class="text-xl font-bold">Badges</h2>
+                            <p class="text-green-100 text-sm">Your Achievements</p>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="p-6 fade-in">
+                    <!-- Progress Overview -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow mb-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">12 / 20</div>
+                            <div class="text-sm text-gray-600 mb-4">Badges Unlocked</div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="progress-bar h-3 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Earned Badges -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Earned Badges</h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-white rounded-2xl p-4 text-center card-shadow hover-lift cursor-pointer" onclick="showBadgeDetail(1)">
+                                <div class="w-16 h-16 cream-gradient rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-orange-600 text-2xl">🏆</span>
+                                </div>
+                                <div class="text-sm font-semibold text-gray-800">Eco Warrior</div>
+                                <div class="text-xs text-gray-600 mt-1">25 Reports</div>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl p-4 text-center card-shadow hover-lift cursor-pointer" onclick="showBadgeDetail(2)">
+                                <div class="w-16 h-16 blue-gradient rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-white text-2xl">🎯</span>
+                                </div>
+                                <div class="text-sm font-semibold text-gray-800">Sharp Eye</div>
+                                <div class="text-xs text-gray-600 mt-1">95% Accuracy</div>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl p-4 text-center card-shadow hover-lift cursor-pointer" onclick="showBadgeDetail(3)">
+                                <div class="w-16 h-16 eco-gradient rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-white text-2xl">⚡</span>
+                                </div>
+                                <div class="text-sm font-semibold text-gray-800">Quick Reporter</div>
+                                <div class="text-xs text-gray-600 mt-1">5 in 1 hour</div>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl p-4 text-center card-shadow hover-lift cursor-pointer">
+                                <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-white text-2xl">🌍</span>
+                                </div>
+                                <div class="text-sm font-semibold text-gray-800">Earth Guardian</div>
+                                <div class="text-xs text-gray-600 mt-1">50 Reports</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Locked Badges -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Locked Badges</h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-gray-50 rounded-2xl p-4 text-center card-shadow opacity-60">
+                                <div class="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-gray-500 text-2xl">🌟</span>
+                                </div>
+                                <div class="text-sm font-semibold text-gray-500">Legend</div>
+                                <div class="text-xs text-gray-400 mt-1">100 Reports</div>
+                                <div class="text-xs text-gray-400 mt-2">77 more needed</div>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-2xl p-4 text-center card-shadow opacity-60">
+                                <div class="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-gray-500 text-2xl">🔥</span>
+                                </div>
+                                <div class="text-sm font-semibold text-gray-500">Streak Master</div>
+                                <div class="text-xs text-gray-400 mt-1">30 day streak</div>
+                                <div class="text-xs text-gray-400 mt-2">25 days to go</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Badge Detail View -->
+        <div id="badgeDetailView" class="view hidden">
+            <div class="slide-in">
+                <header class="eco-gradient p-6 text-white">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="showBadges()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <span class="text-white">←</span>
+                        </button>
+                        <div>
+                            <h2 class="text-xl font-bold">Badge Details</h2>
+                            <p class="text-green-100 text-sm">Achievement Info</p>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="p-6 fade-in">
+                    <!-- Badge Display -->
+                    <div class="bg-white rounded-3xl p-8 text-center card-shadow mb-6">
+                        <div class="w-24 h-24 cream-gradient rounded-full flex items-center justify-center mx-auto mb-4 pulse-eco">
+                            <span class="text-orange-600 text-4xl">🏆</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Eco Warrior</h3>
+                        <p class="text-gray-600 mb-4">Awarded for submitting 25 waste reports</p>
+                        <div class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium inline-block">
+                            Unlocked 3 days ago
+                        </div>
+                    </div>
+                    
+                    <!-- Badge Stats -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow mb-6">
+                        <h3 class="font-semibold text-gray-800 mb-4">Achievement Stats</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Reports Required</span>
+                                <span class="text-sm font-medium text-gray-800">25</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Your Progress</span>
+                                <span class="text-sm font-medium text-green-600">25/25 ✓</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Points Earned</span>
+                                <span class="text-sm font-medium text-orange-600">+200</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Rarity</span>
+                                <span class="text-sm font-medium text-purple-600">Common</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Next Badge -->
+                    <div class="bg-white rounded-2xl p-5 card-shadow">
+                        <h3 class="font-semibold text-gray-800 mb-4">Next Badge</h3>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center">
+                                <span class="text-white text-2xl">🌍</span>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-gray-800">Earth Guardian</div>
+                                <div class="text-sm text-gray-600">Submit 50 waste reports</div>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                    <div class="progress-bar h-2 rounded-full" style="width: 50%"></div>
+                                </div>
+                                <div class="text-xs text-gray-600 mt-1">25 more reports needed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scan Result Modal -->
+        <div id="scanResultModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white rounded-3xl p-6 w-full max-w-sm fade-in">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-red-600 text-3xl">☢️</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Chemical Waste Detected!</h3>
+                        <p class="text-gray-600 text-sm mb-6">AI Confidence: 94%</p>
+                        
+                        <div class="bg-green-50 rounded-2xl p-4 mb-6">
+                            <div class="text-green-700 font-bold text-lg">+100 Points Earned!</div>
+                            <div class="text-green-600 text-sm">Authorities have been notified</div>
+                        </div>
+                        
+                        <button onclick="closeScanResult()" class="w-full eco-gradient text-white py-3 rounded-2xl font-semibold">
+                            Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // View management
+        function showView(viewId) {
+            // Hide all views
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.add('hidden');
+                view.classList.remove('active');
+            });
+            
+            // Show selected view
+            const targetView = document.getElementById(viewId);
+            targetView.classList.remove('hidden');
+            targetView.classList.add('active');
+        }
+
+        // Navigation functions
+        function showDashboard() {
+            showView('dashboard');
+        }
+
+        function showStats() {
+            showView('statsView');
+        }
+
+        function showScanner() {
+            showView('scannerView');
+        }
+
+        function showMap() {
+            showView('mapView');
+        }
+
+        function showReports() {
+            showView('reportsView');
+        }
+
+        function showReportDetail(id) {
+            showView('reportDetailView');
+        }
+
+        function showBadges() {
+            showView('badgesView');
+        }
+
+        function showBadgeDetail(id) {
+            showView('badgeDetailView');
+        }
+
+        // Scanner simulation
+        function simulateScan() {
+            // Show loading state
+            const button = event.target;
+            button.innerHTML = 'Scanning...';
+            button.disabled = true;
+            
+            // Simulate scan delay
+            setTimeout(() => {
+                button.innerHTML = 'Start Scanning';
+                button.disabled = false;
+                
+                // Show result modal
+                document.getElementById('scanResultModal').classList.remove('hidden');
+            }, 2000);
+        }
+
+        function closeScanResult() {
+            document.getElementById('scanResultModal').classList.add('hidden');
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            showDashboard();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9641fe4100afb2b1',t:'MTc1MzM0NTE3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
